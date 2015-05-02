@@ -62,7 +62,7 @@ def main():
   args = get_args()
 
   with PySerialDriver(args.serial_port[0], args.baud[0]) as driver:
-    with Handler(driver.read, driver.write, args.verbose) as handler:
+    with Handler(driver.read, driver.write) as handler:
       udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
       handler.add_callback(send_udp_callback_generator(udp, args))
       handler.start()
